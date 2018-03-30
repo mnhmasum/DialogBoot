@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DialogBoot.iml" filepath="$PROJECT_DIR$/DialogBoot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dialogboot-annotations/dialogboot-annotations.iml" filepath="$PROJECT_DIR$/dialogboot-annotations/dialogboot-annotations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dialogboot-compiler/dialogboot-compiler.iml" filepath="$PROJECT_DIR$/dialogboot-compiler/dialogboot-compiler.iml" />
+    </modules>
+  </component>
+</project>
