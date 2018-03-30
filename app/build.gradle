@@ -25,6 +25,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile project(':dialogboot-annotations')
-    annotationProcessor project(':dialogboot-compiler')
+    /*compile project(':dialogboot-annotations')
+     annotationProcessor project(':dialogboot-compiler')
+     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+     */
+    //compile 'com.github.mnhmasum:DialogBoot:1.0'
+    //compile 'com.github.mnhmasum:SimpleAlphabetIndexer:1.4'
+    compile 'com.github.mnhmasum.DialogBoot:dialogboot-annotations:1.0'
+    annotationProcessor 'com.github.mnhmasum.DialogBoot:dialogboot-compiler:1.0'
 }
