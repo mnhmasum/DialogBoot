@@ -8,11 +8,5 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="full_screen_dialog">
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowBackground">@color/colorPrimary</item>
-    </style>
 
 </resources>
