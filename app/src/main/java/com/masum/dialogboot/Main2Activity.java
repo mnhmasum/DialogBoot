@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import dialogboot.InjectDialog;
-import dialogboot.InjectView;
 
 public class Main2Activity extends BaseActivity implements View.OnClickListener{
 

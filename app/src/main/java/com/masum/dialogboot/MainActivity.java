@@ -10,27 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import dialogboot.InjectDialog;
-import dialogboot.InjectView;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
-    @InjectDialog(
-            isCancelable = true,
-            layout = R.layout.layout,
-            getMessage = "Hi am a Dialog Boot to create a dialog"
-    )
-    public AlertDialog dialog;
 
-
-    @InjectView(layout = R.layout.layout)
-    View view;
-
-    @InjectView(layout = R.layout.layout)
-    View view1;
-
-    @InjectView(layout = R.layout.layout)
-    View view2;
 
 
     @Override
@@ -38,12 +21,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DialogBootLoader.bind(this, view);
 
-        Button button = view.findViewById(R.id.button2);
-        button.setOnClickListener(this);
-        dialog.setView(view);
-        dialog.show();
 
     }
 
@@ -51,7 +29,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     public void onClick(View view) {
         if (view.getId() == R.id.button2) {
             Toast.makeText(this, "Hi there", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
+            //dialog.dismiss();
         }
     }
 }
