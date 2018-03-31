@@ -34,4 +34,5 @@ dependencies {
     //implementation 'com.github.mnhmasum:DialogBoot:1.2'
     //annotationProcessor 'com.github.mnhmasum.DialogBoot:dialogboot-compiler:1.2'
     implementation project(':mylibrary')
+    implementation project(':javalib')
 }

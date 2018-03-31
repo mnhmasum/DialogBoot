@@ -1,2 +1,2 @@
-include ':app', ':dialogboot-annotations', ':dialogboot-compiler', ':mylibrary'
+include ':app', ':dialogboot-annotations', ':dialogboot-compiler', ':mylibrary', ':javalib'
 rootProject.name = 'DialogBoot'

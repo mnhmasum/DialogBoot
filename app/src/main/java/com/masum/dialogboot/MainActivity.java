@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import dialogboot.masum.com.javalib.MyOnlyJava;
+import dialogboot.masum.com.mylibrary.MyLib;
+
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
@@ -20,6 +23,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toast.makeText(this, "" + MyLib.getString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + MyOnlyJava.getJavaString(), Toast.LENGTH_SHORT).show();
 
 
 
