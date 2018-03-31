@@ -4,7 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.annotationsample.Navigator;
 
+import dialogboot.masum.com.annotation.NewIntent;
+
+@NewIntent
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     String x;
@@ -20,6 +24,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     public void onClick(View view) {
         if (view.getId() == R.id.button2) {
             Toast.makeText(this, "Hi there", Toast.LENGTH_SHORT).show();
+            Navigator.startMainActivity(this);
             //dialog.dismiss();
         }
     }
