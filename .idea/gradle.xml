@@ -8,9 +8,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Annotation" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/dialogboot-annotations" />
-            <option value="$PROJECT_DIR$/dialogboot-compiler" />
             <option value="$PROJECT_DIR$/javalib" />
             <option value="$PROJECT_DIR$/mylibrary" />
           </set>
