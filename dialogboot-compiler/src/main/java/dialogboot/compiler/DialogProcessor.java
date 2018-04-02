@@ -25,11 +25,10 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
-import javax.swing.text.View;
 import javax.tools.Diagnostic;
 
-import dialogboot.InjectDialog;
-import dialogboot.InjectView;
+import com.masum.annotation.InjectDialog;
+import com.masum.annotation.InjectView;
 
 
 @AutoService(Processor.class)

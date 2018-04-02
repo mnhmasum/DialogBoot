@@ -1,0 +1,33 @@
+/**
+ * Bintray release configuration
+ * */
+ext {
+  bintrayRepo = 'maven'
+  bintrayName = POM_BINTRAY_NAME
+
+  publishedGroupId = 'com.masum.dialogboot'
+  libraryName = 'dialogboot-annotation'
+  artifact = POM_ARTIFACT_ID
+  packagingType = POM_PACKAGING
+
+  libraryDescription = POM_DESCRIPTION
+
+  siteUrl = 'https://github.com/mnhmasum/DialogBoot'
+  gitUrl = 'https://github.com/mnhmasum/DialogBoot.git'
+
+  libraryVersion = POM_VERSION
+
+  developerId = 'masum.cse14'
+  developerName = 'Nazmul Hasan'
+  developerEmail = 'masum.cse14@gmail.com'
+
+  licenseName = 'MIT'
+  licenseUrl = 'https://github.com/mnhmasum/DialogBoot/LICENSE'
+  allLicenses = ["MIT"]
+}
+
+// Set up the Android Maven publication.
+apply from: rootProject.file('jcenter/maven-install.gradle')
+
+// Publish on Bintray.
+apply from: rootProject.file('jcenter/bintray.gradle')

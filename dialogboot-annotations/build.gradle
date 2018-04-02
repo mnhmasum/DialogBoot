@@ -1,7 +1,8 @@
 apply plugin: 'java-library'
+apply from: rootProject.file('release-bintray.gradle')
 
 dependencies {
-    //implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 sourceCompatibility = "1.7"
