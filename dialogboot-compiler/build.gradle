@@ -5,8 +5,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.google.auto.service:auto-service:1.0-rc2'
     implementation 'com.squareup:javapoet:1.8.0'
-    //implementation project(':dialogboot-annotations')
-    implementation 'com.masum.dialogboot:dialogboot-annotations:1.1.0'
+    implementation project(':dialogboot-annotations')
 }
 
 sourceCompatibility = "1.7"
