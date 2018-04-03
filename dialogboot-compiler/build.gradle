@@ -3,7 +3,7 @@ apply from: rootProject.file('release-bintray.gradle')
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.google.auto.service:auto-service:1.0-rc2'
+    implementation 'com.google.auto.service:auto-service:1.0-rc3'
     implementation 'com.squareup:javapoet:1.8.0'
     implementation project(':dialogboot-annotations')
 }

@@ -27,7 +27,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     //implementation project(':dialogboot-annotations')
     implementation 'com.masum.dialogboot:dialogboot-annotations:1.1.0'
-
     annotationProcessor 'com.masum.dialogboot:dialogboot-compiler:1.1.0'
     //annotationProcessor project(':dialogboot-compiler')
     //implementation 'com.github.mnhmasum:SimpleAlphabetIndexer:1.4'
