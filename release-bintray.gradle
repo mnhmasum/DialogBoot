@@ -2,7 +2,7 @@
  * Bintray release configuration
  * */
 ext {
-  bintrayRepo = 'maven'
+  bintrayRepo = 'DialogBoot'
   bintrayName = POM_BINTRAY_NAME
 
   publishedGroupId = 'com.masum.dialogboot'
