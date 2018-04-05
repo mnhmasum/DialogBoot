@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //DialogBootLoader.bind(this, view);
+        DialogBootLoader.bind(this, view);
 
         Button button = view.findViewById(R.id.button2);
         button.setOnClickListener(this);
