@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/dialogboot-annotations" />
             <option value="$PROJECT_DIR$/dialogboot-compiler" />
+            <option value="$PROJECT_DIR$/dialogboot-library" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

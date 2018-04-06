@@ -1,4 +1,4 @@
-package com.masum.dialogboot;
+package com.masum.dialogbootloader;
 
 import android.app.Activity;
 import android.util.Log;
@@ -11,7 +11,10 @@ import java.lang.reflect.InvocationTargetException;
  * Created by mac on 3/29/18.
  */
 
+@SuppressWarnings("unchecked")
 public class DialogBootLoader {
+
+    @SuppressWarnings("unchecked")
     public static void bind(Activity activity) {
         try {
 
@@ -20,19 +23,12 @@ public class DialogBootLoader {
             Constructor constructor = bindingClass.getConstructor(activity.getClass());
             constructor.newInstance(activity);
 
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
             Log.e("TAG", "Meaningful Message1", e);
-        } catch (NoSuchMethodException e) {
-            Log.e("TAG", "Meaningful Message2", e);
-        } catch (IllegalAccessException e) {
-            Log.e("TAG", "Meaningful Message3", e);
-        } catch (InstantiationException e) {
-            Log.e("TAG", "Meaningful Message4", e);
-        } catch (InvocationTargetException e) {
-            Log.e("TAG", "Meaningful Message5", e);
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static void bind(Activity activity, View view) {
         try {
 
@@ -41,10 +37,6 @@ public class DialogBootLoader {
             //noinspection unchecked
             Constructor constructor = bindingClass.getConstructor(activity.getClass() , View.class);
             constructor.newInstance(activity, view);
-
-           /* Constructor constructor = bindingClass.getConstructor(new Class[] { Activity.class, View.class});
-            constructor.newInstance(activity, view});*/
-
 
         } catch (ClassNotFoundException e) {
             Log.e("TAG", "Meaningful Message", e);

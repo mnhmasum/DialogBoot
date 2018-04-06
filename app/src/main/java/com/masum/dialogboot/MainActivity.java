@@ -9,6 +9,8 @@ import android.widget.Toast;
 import com.masum.annotation.InjectDialog;
 import com.masum.annotation.InjectView;
 
+import com.masum.dialogbootloader.DialogBootLoader;
+
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     @InjectDialog(

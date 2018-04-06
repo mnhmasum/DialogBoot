@@ -38,11 +38,8 @@ public class DialogProcessor extends AbstractProcessor {
     private static final ClassName classView = ClassName.get("android.view", "View");
     private static final ClassName classActivity = ClassName.get("android.app", "Activity");
 
-    private String injectViewMethodName = "injectView";
-
     private Messager messager;
     private Filer filer;
-    Integer x = 0;
     private Elements elements;
     private HashMap<Element, String> elementsWithPackageName;
 
@@ -106,8 +103,6 @@ public class DialogProcessor extends AbstractProcessor {
                 //b.addStatement("activity." + entry.getKey() + " = $L", entry.getKey() + "Builder" + ".create()");
 
                 MethodSpec methodSpec1 = b.build();
-
-
                 navigatorClass1.addMethod(methodSpec1);
 
 
@@ -152,15 +147,12 @@ public class DialogProcessor extends AbstractProcessor {
                 }
 
 
-
                 b1.addStatement("activity." + entry.getKey() + " = activity.getLayoutInflater().inflate($L, $L)", layout, null );
                 b1.addStatement("String x = $S", elements.getPackageOf(entry.getKey()).getQualifiedName().toString() + entry.getKey().getEnclosingElement());
 
                 //b.addStatement("activity." + entry.getKey() + " = $L", entry.getKey() + "Builder" + ".create()");
 
                 m = entry.getKey().getEnclosingElement().toString();
-
-
 
             }
 
@@ -181,9 +173,6 @@ public class DialogProcessor extends AbstractProcessor {
                 navigatorClass1.addMethod(b1.build());
 
             }
-
-
-
 
             JavaFile.builder("com.masum.dialogboot", navigatorClass1.build()).build().writeTo(filer);
 
