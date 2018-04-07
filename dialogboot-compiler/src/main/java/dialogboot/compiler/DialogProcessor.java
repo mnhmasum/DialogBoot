@@ -30,14 +30,13 @@ import javax.tools.Diagnostic;
 import com.masum.annotation.InjectDialog;
 import com.masum.annotation.InjectView;
 
+import utils.CompilerUtils;
+
+import static utils.CompilerUtils.PACKAGE_NAME;
+
 
 @AutoService(Processor.class)
 public class DialogProcessor extends AbstractProcessor {
-
-    private static final ClassName classIntent = ClassName.get("android.app", "AlertDialog");
-    private static final ClassName classView = ClassName.get("android.view", "View");
-    private static final ClassName classActivity = ClassName.get("android.app", "Activity");
-
     private Messager messager;
     private Filer filer;
     private Elements elements;
@@ -58,9 +57,9 @@ public class DialogProcessor extends AbstractProcessor {
         try {
 
             TypeSpec.Builder navigatorClass1 = TypeSpec
-                    .classBuilder("DialogBoot")
+                    .classBuilder(CompilerUtils.CLASS_NAME)
                     .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
-                    .addField(classIntent, "al",  Modifier.PUBLIC, Modifier.STATIC);
+                    .addField(CompilerUtils.classIntent, "al",  Modifier.PUBLIC, Modifier.STATIC);
 
             for(Element element : roundEnvironment.getElementsAnnotatedWith(InjectDialog.class)) {
                 if (element.getKind() != ElementKind.FIELD) {
@@ -79,30 +78,26 @@ public class DialogProcessor extends AbstractProcessor {
                 int fullScreen = entry.getKey().getAnnotation(InjectDialog.class).fullScreen();
 
 
-                MethodSpec.Builder b = MethodSpec.constructorBuilder();
-                b.addModifiers(Modifier.PUBLIC);
-                b.addParameter(TypeName.get(entry.getKey().getEnclosingElement().asType()), "activity");
+                MethodSpec.Builder methodBuilder = MethodSpec.constructorBuilder();
+                methodBuilder.addModifiers(Modifier.PUBLIC);
+                methodBuilder.addParameter(TypeName.get(entry.getKey().getEnclosingElement().asType()), "activity");
 
-                /*b.addStatement("activity." + entry.getKey() + " = $L", "new " + classIntent
-                        + ".Builder(" + "" + "activity)");*/
                 String dialogBuilder = entry.getKey() + "";
 
-                b.addStatement("activity." + dialogBuilder + " = $L", "new " + classIntent
-                        + ".Builder(" + "" + "activity).create()");
+                methodBuilder.addStatement("activity" + "." + dialogBuilder + " = $L", "new " + CompilerUtils.classIntent
+                        + "." + "Builder(" + "activity).create()");
 
-                String inflater = "activity." + "getLayoutInflater()" + ".inflate(" + layout + ", null)";
+                String inflater = "activity" + "." + "getLayoutInflater()" + ".inflate(" + layout + ", null)";
 
 
-                b.addStatement("activity." + dialogBuilder + ".setMessage ($S)", val + elements.getTypeElement("java.lang.String").asType());
-                b.addStatement("activity." + dialogBuilder + ".setView ($L)", inflater);
+                methodBuilder.addStatement("activity" + "." + dialogBuilder + ".setMessage ($S)", val + elements.getTypeElement("java.lang.String").asType());
+                methodBuilder.addStatement("activity" + "." + dialogBuilder + ".setView ($L)", inflater);
 
                 if (!isCancelable) {
-                    b.addStatement("activity." + dialogBuilder + ".setCancelable ($L)", isCancelable);
+                    methodBuilder.addStatement("activity" + "." + dialogBuilder + ".setCancelable ($L)", isCancelable);
                 }
 
-                //b.addStatement("activity." + entry.getKey() + " = $L", entry.getKey() + "Builder" + ".create()");
-
-                MethodSpec methodSpec1 = b.build();
+                MethodSpec methodSpec1 = methodBuilder.build();
                 navigatorClass1.addMethod(methodSpec1);
 
 
@@ -119,21 +114,21 @@ public class DialogProcessor extends AbstractProcessor {
 
             }
 
-
-
             HashMap<Element, ArrayList<Element>> h = new HashMap<>();
 
-            String m = "";
-            MethodSpec.Builder b1 = null;
+            String elementClassName = "";
+
+            MethodSpec.Builder viewInjectorMethod = null;
+
             for (Map.Entry<Element, String> entry: elementsWithPackageName.entrySet()) {
 
                 int layout = entry.getKey().getAnnotation(InjectView.class).layout();
 
-                if (!m.equals(entry.getKey().getEnclosingElement().toString())) {
-                    b1 = MethodSpec.constructorBuilder();
-                    b1.addModifiers(Modifier.PUBLIC);
-                    b1.addParameter(TypeName.get(entry.getKey().getEnclosingElement().asType()), "activity");
-                    b1.addParameter(classView, "view");
+                if (!elementClassName.equals(entry.getKey().getEnclosingElement().toString())) {
+                    viewInjectorMethod = MethodSpec.constructorBuilder();
+                    viewInjectorMethod.addModifiers(Modifier.PUBLIC);
+                    viewInjectorMethod.addParameter(TypeName.get(entry.getKey().getEnclosingElement().asType()), "activity");
+                    viewInjectorMethod.addParameter(CompilerUtils.classView, "view");
                 }
 
                 Element q = entry.getKey().getEnclosingElement();
@@ -147,34 +142,32 @@ public class DialogProcessor extends AbstractProcessor {
                 }
 
 
-                b1.addStatement("activity." + entry.getKey() + " = activity.getLayoutInflater().inflate($L, $L)", layout, null );
-                b1.addStatement("String x = $S", elements.getPackageOf(entry.getKey()).getQualifiedName().toString() + entry.getKey().getEnclosingElement());
+                viewInjectorMethod.addStatement("activity." + entry.getKey() + " = activity.getLayoutInflater().inflate($L, $L)", layout, null );
+                viewInjectorMethod.addStatement("String x = $S", elements.getPackageOf(entry.getKey()).getQualifiedName().toString() + entry.getKey().getEnclosingElement());
 
-                //b.addStatement("activity." + entry.getKey() + " = $L", entry.getKey() + "Builder" + ".create()");
-
-                m = entry.getKey().getEnclosingElement().toString();
+                elementClassName = entry.getKey().getEnclosingElement().toString();
 
             }
 
             for(Map.Entry<Element, ArrayList<Element>> j:  h.entrySet()) {
 
-                b1 = MethodSpec.constructorBuilder();
-                b1.addModifiers(Modifier.PUBLIC);
+                viewInjectorMethod = MethodSpec.constructorBuilder();
+                viewInjectorMethod.addModifiers(Modifier.PUBLIC);
 
-                b1.addParameter(TypeName.get(j.getKey().asType()), "activity");
-                b1.addParameter(classView, "view");
+                viewInjectorMethod.addParameter(TypeName.get(j.getKey().asType()), "activity");
+                viewInjectorMethod.addParameter(CompilerUtils.classView, "view");
 
                 for (int i = 0; i < j.getValue().size(); i++) {
                     int layout = j.getValue().get(i).getAnnotation(InjectView.class).layout();
-                    b1.addStatement("activity." + j.getValue().get(i) + " = activity.getLayoutInflater().inflate($L, $L)",
+                    viewInjectorMethod.addStatement("activity." + j.getValue().get(i) + " = activity.getLayoutInflater().inflate($L, $L)",
                              layout, null);
                 }
 
-                navigatorClass1.addMethod(b1.build());
+                navigatorClass1.addMethod(viewInjectorMethod.build());
 
             }
 
-            JavaFile.builder("com.masum.dialogboot", navigatorClass1.build()).build().writeTo(filer);
+            JavaFile.builder(PACKAGE_NAME, navigatorClass1.build()).build().writeTo(filer);
 
 
         } catch (Exception e) {
