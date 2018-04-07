@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/dialogboot-annotations/dialogboot-annotations.iml" filepath="$PROJECT_DIR$/dialogboot-annotations/dialogboot-annotations.iml" />
       <module fileurl="file://$PROJECT_DIR$/dialogboot-compiler/dialogboot-compiler.iml" filepath="$PROJECT_DIR$/dialogboot-compiler/dialogboot-compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dialogboot-library/dialogboot-library.iml" filepath="$PROJECT_DIR$/dialogboot-library/dialogboot-library.iml" />
       <module fileurl="file://$PROJECT_DIR$/dialogboot-library/mylibrary.iml" filepath="$PROJECT_DIR$/dialogboot-library/mylibrary.iml" />
     </modules>
   </component>
