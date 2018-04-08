@@ -50,7 +50,7 @@ protected void onCreate(Bundle savedInstanceState) {
 public class MainActivity implements View.OnClickListener{
    @InjectDialog(
             isCancelable = true,
-            getMessage = "Hi am a Dialog Boot to create a dialog"
+            getMessage = "Hi am Dialog Boot to create a dialog"
     )
     public AlertDialog dialog;
 
