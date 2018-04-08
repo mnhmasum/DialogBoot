@@ -1,22 +1,25 @@
 package com.masum.dialogboot;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.masum.annotation.InjectDialog;
+import com.masum.annotation.InjectView;
+
 public class Main2Activity extends BaseActivity implements View.OnClickListener{
 
-    /*@InjectDialog(isCancelable = false,
+    @InjectDialog(isCancelable = false,
             getMessage = "Hi Second"
     )
     public AlertDialog dialog;
 
-*/
-   /* @InjectView(layout = R.layout.layout)
+    @InjectView(layout = R.layout.layout)
     View view;
 
     @InjectView(layout = R.layout.layout)
-    View view1;*/
+    View view1;
 
 
 
