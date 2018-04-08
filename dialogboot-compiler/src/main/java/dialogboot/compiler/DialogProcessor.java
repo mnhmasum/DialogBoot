@@ -165,7 +165,9 @@ public class DialogProcessor extends AbstractProcessor {
             String inflater = getLayout(ACTIVITY_PARAMETER_NAME, layout);
 
             methodBuilder.addStatement(ACTIVITY_PARAMETER_NAME + "." + annotatedDialogVariableName + ".setMessage ($S)", message);
-            methodBuilder.addStatement(ACTIVITY_PARAMETER_NAME + "." + annotatedDialogVariableName + ".setView ($L)", inflater);
+            if (layout > 0) {
+                methodBuilder.addStatement(ACTIVITY_PARAMETER_NAME + "." + annotatedDialogVariableName + ".setView ($L)", inflater);
+            }
 
             if (!isCancelable) {
                 methodBuilder.addStatement(ACTIVITY_PARAMETER_NAME + "." + annotatedDialogVariableName + ".setCancelable ($L)", isCancelable);

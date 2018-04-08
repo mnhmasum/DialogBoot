@@ -20,21 +20,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     )
     public AlertDialog dialog;
 
-    @InjectDialog(
-            isCancelable = true,
-            layout = R.layout.layout,
-            getMessage = "Hi am a Dialog Boot to create a dialog"
-    )
-    public AlertDialog dialog1;
-
-   /* @InjectDialog(
-            isCancelable = true,
-            layout = R.layout.layout,
-            getMessage = "Hi am a Dialog Boot to create a dialog"
-    )
-    public AlertDialog dialog1;
-*/
-
     @InjectView(layout = R.layout.layout)
     View view;
 
@@ -50,7 +35,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       DialogBootLoader.bind(this, view);
+        DialogBootLoader.bind(this, view);
+
+        dialog.show();
 
         Button button = view.findViewById(R.id.button2);
         button.setOnClickListener(this);
