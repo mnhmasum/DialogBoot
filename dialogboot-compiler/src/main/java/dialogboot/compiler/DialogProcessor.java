@@ -79,7 +79,7 @@ public class DialogProcessor extends AbstractProcessor {
 
         for(Element element : roundEnvironment.getElementsAnnotatedWith(InjectDialog.class)) {
             if (element.getKind() != ElementKind.FIELD) {
-                messager.printMessage(Diagnostic.Kind.ERROR, "Annotation didn't apply on the field");
+                messager.printMessage(Diagnostic.Kind.ERROR, CompilerUtils.ERROR_MESSAGE_WHEN_APPLIED_WRONG_PALCE);
             }
 
             elementsWithPackageName.put(element, elements.getPackageOf(element).getQualifiedName().toString());
@@ -105,7 +105,7 @@ public class DialogProcessor extends AbstractProcessor {
 
         for(Element element : roundEnvironment.getElementsAnnotatedWith(InjectView.class)) {
             if (element.getKind() != ElementKind.FIELD) {
-                messager.printMessage(Diagnostic.Kind.ERROR, "Annotation didn't apply on the field");
+                messager.printMessage(Diagnostic.Kind.ERROR, CompilerUtils.ERROR_MESSAGE_WHEN_APPLIED_WRONG_PALCE);
             }
 
             elementsWithPackageName.put(element, elements.getPackageOf(element).getQualifiedName().toString());
@@ -178,14 +178,6 @@ public class DialogProcessor extends AbstractProcessor {
 
     }
 
-    private String getLayout(String parameterName, int layout) {
-        return parameterName + "." + "getLayoutInflater()" + ".inflate(" + layout + ", null)";
-    }
-
-    private String createNewAlertDialog(String activityName) {
-        return "new " + CompilerUtils.classIntent + "." + "Builder(" + activityName + ").create()";
-    }
-
     private void addToEnclosedClassList(HashMap<Element, ArrayList<Element>> enclosedClassList, Map.Entry<Element, String> entry) {
         Element enclosedClass = entry.getKey().getEnclosingElement();
 
@@ -196,6 +188,14 @@ public class DialogProcessor extends AbstractProcessor {
             elements.add(entry.getKey());
             enclosedClassList.put(enclosedClass, elements);
         }
+    }
+
+    private String getLayout(String parameterName, int layout) {
+        return parameterName + "." + "getLayoutInflater()" + ".inflate(" + layout + ", null)";
+    }
+
+    private String createNewAlertDialog(String activityName) {
+        return "new " + CompilerUtils.classIntent + "." + "Builder(" + activityName + ").create()";
     }
 
     @Override

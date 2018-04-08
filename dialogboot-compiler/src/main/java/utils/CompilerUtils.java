@@ -11,4 +11,5 @@ public class CompilerUtils {
     public static final String CLASS_NAME = "DialogBoot";
     public static final ClassName classIntent = ClassName.get("android.app", "AlertDialog");
     public static final ClassName classView = ClassName.get("android.view", "View");
+    public static final String ERROR_MESSAGE_WHEN_APPLIED_WRONG_PALCE = "Annotation didn't apply on the field";
 }
