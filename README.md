@@ -15,11 +15,12 @@ DialogBootLoader.bind(this);
 dialog.show();
 ```
 
-### Before using DialogBoot 
+### DialogBoot Plus
 ```Java
 View view = getLayoutInflater.inflate(R.layout.my_layout, null);
 ```
-### After using DialogBoot 
+Don't need to use this code to create a view just use the below annotation @InjectView
+
 ```JAVA
 @InjectView(layout = R.layout.layout)
 View view;
