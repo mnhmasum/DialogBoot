@@ -43,6 +43,7 @@ protected void onCreate(Bundle savedInstanceState) {
     DialogBootLoader.bind(this);
     dialog.show();
 }
+```
 
 
 ### EXAMPLE 2 with custom layout
