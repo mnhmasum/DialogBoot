@@ -2,7 +2,6 @@ package dialogboot.compiler;
 
 import com.google.auto.service.AutoService;
 import com.google.common.collect.ImmutableSet;
-import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeName;
@@ -33,11 +32,12 @@ import com.masum.annotation.InjectView;
 import utils.CompilerUtils;
 
 import static utils.CompilerUtils.PACKAGE_NAME;
-import static utils.CompilerUtils.classIntent;
 
 
 @AutoService(Processor.class)
 public class DialogProcessor extends AbstractProcessor {
+    private static String ACTIVITY_PARAMETER_NAME = "activity";
+    private static String VIEW_PARAMETER_NAME = "view";
     private Messager messager;
     private Filer filer;
     private Elements elements;
@@ -61,16 +61,7 @@ public class DialogProcessor extends AbstractProcessor {
                     .classBuilder(CompilerUtils.CLASS_NAME)
                     .addModifiers(Modifier.PUBLIC, Modifier.FINAL);
 
-            for(Element element : roundEnvironment.getElementsAnnotatedWith(InjectDialog.class)) {
-                if (element.getKind() != ElementKind.FIELD) {
-                    messager.printMessage(Diagnostic.Kind.ERROR, "Annotation didn't apply on the field");
-                }
-
-                elementsWithPackageName.put(element, elements.getPackageOf(element).getQualifiedName().toString());
-
-            }
-
-            dialogInjectorMethodBuilder(dialogBootClass);
+            dialogInjectorMethodBuilder(roundEnvironment, dialogBootClass);
 
             viewInjectorMethodBuilder(roundEnvironment, dialogBootClass);
 
@@ -84,7 +75,18 @@ public class DialogProcessor extends AbstractProcessor {
         return true;
     }
 
-    private void dialogInjectorMethodBuilder(TypeSpec.Builder dialogBootClass) {
+    private void dialogInjectorMethodBuilder(RoundEnvironment roundEnvironment, TypeSpec.Builder dialogBootClass) {
+
+        for(Element element : roundEnvironment.getElementsAnnotatedWith(InjectDialog.class)) {
+            if (element.getKind() != ElementKind.FIELD) {
+                messager.printMessage(Diagnostic.Kind.ERROR, "Annotation didn't apply on the field");
+            }
+
+            elementsWithPackageName.put(element, elements.getPackageOf(element).getQualifiedName().toString());
+
+        }
+
+
         HashMap<Element, ArrayList<Element>> enclosedViewElementClassList = new HashMap<>();
 
         for (Map.Entry<Element, String> entry: elementsWithPackageName.entrySet()) {
@@ -127,13 +129,14 @@ public class DialogProcessor extends AbstractProcessor {
         viewInjectorMethod = MethodSpec.constructorBuilder();
         viewInjectorMethod.addModifiers(Modifier.PUBLIC);
 
-        viewInjectorMethod.addParameter(TypeName.get(elementArrayListEntry.getKey().asType()), "activity");
-        viewInjectorMethod.addParameter(CompilerUtils.classView, "view");
+        viewInjectorMethod.addParameter(TypeName.get(elementArrayListEntry.getKey().asType()), ACTIVITY_PARAMETER_NAME);
+        viewInjectorMethod.addParameter(CompilerUtils.classView, VIEW_PARAMETER_NAME);
 
         for (int i = 0; i < elementArrayListEntry.getValue().size(); i++) {
             int layout = elementArrayListEntry.getValue().get(i).getAnnotation(InjectView.class).layout();
-            viewInjectorMethod.addStatement("activity." + elementArrayListEntry.getValue().get(i)
-                            + " = activity.getLayoutInflater().inflate($L, $L)", layout, null);
+            viewInjectorMethod.addStatement(ACTIVITY_PARAMETER_NAME + "." + elementArrayListEntry.getValue().get(i)
+                            + " = $L", getLayout(ACTIVITY_PARAMETER_NAME, layout));
+
         }
 
         dialogBootClass.addMethod(viewInjectorMethod.build());
@@ -143,31 +146,29 @@ public class DialogProcessor extends AbstractProcessor {
         MethodSpec.Builder methodBuilder;
         methodBuilder = MethodSpec.constructorBuilder();
         methodBuilder.addModifiers(Modifier.PUBLIC);
-        methodBuilder.addParameter(TypeName.get(elementArrayListEntry.getKey().asType()), "activity");
+        methodBuilder.addParameter(TypeName.get(elementArrayListEntry.getKey().asType()), ACTIVITY_PARAMETER_NAME);
 
 
         for (int i = 0; i < elementArrayListEntry.getValue().size(); i++) {
 
-            String dialogBuilder = elementArrayListEntry.getValue().get(i) + "";
+            String annotatedDialogVariableName = elementArrayListEntry.getValue().get(i) + "";
 
-            String val = elementArrayListEntry.getValue().get(i).getAnnotation(InjectDialog.class).getMessage();
+            String message = elementArrayListEntry.getValue().get(i).getAnnotation(InjectDialog.class).getMessage();
 
             boolean isCancelable = elementArrayListEntry.getValue().get(i).getAnnotation(InjectDialog.class).isCancelable();
 
             int layout = elementArrayListEntry.getValue().get(i).getAnnotation(InjectDialog.class).layout();
             int fullScreen = elementArrayListEntry.getValue().get(i).getAnnotation(InjectDialog.class).fullScreen();
 
-            methodBuilder.addStatement("activity" + "." + dialogBuilder + " = $L", "new " + CompilerUtils.classIntent
-                    + "." + "Builder(" + "activity).create()");
+            methodBuilder.addStatement(ACTIVITY_PARAMETER_NAME + "." + annotatedDialogVariableName + " = $L", createNewAlertDialog(ACTIVITY_PARAMETER_NAME));
 
-            String inflater = "activity" + "." + "getLayoutInflater()" + ".inflate(" + layout + ", null)";
+            String inflater = getLayout(ACTIVITY_PARAMETER_NAME, layout);
 
-
-            methodBuilder.addStatement("activity" + "." + dialogBuilder + ".setMessage ($S)", val + elements.getTypeElement("java.lang.String").asType());
-            methodBuilder.addStatement("activity" + "." + dialogBuilder + ".setView ($L)", inflater);
+            methodBuilder.addStatement(ACTIVITY_PARAMETER_NAME + "." + annotatedDialogVariableName + ".setMessage ($S)", message);
+            methodBuilder.addStatement(ACTIVITY_PARAMETER_NAME + "." + annotatedDialogVariableName + ".setView ($L)", inflater);
 
             if (!isCancelable) {
-                methodBuilder.addStatement("activity" + "." + dialogBuilder + ".setCancelable ($L)", isCancelable);
+                methodBuilder.addStatement(ACTIVITY_PARAMETER_NAME + "." + annotatedDialogVariableName + ".setCancelable ($L)", isCancelable);
             }
 
         }
@@ -175,6 +176,14 @@ public class DialogProcessor extends AbstractProcessor {
         dialogBootClass.addMethod(methodBuilder.build());
 
 
+    }
+
+    private String getLayout(String parameterName, int layout) {
+        return parameterName + "." + "getLayoutInflater()" + ".inflate(" + layout + ", null)";
+    }
+
+    private String createNewAlertDialog(String activityName) {
+        return "new " + CompilerUtils.classIntent + "." + "Builder(" + activityName + ").create()";
     }
 
     private void addToEnclosedClassList(HashMap<Element, ArrayList<Element>> enclosedClassList, Map.Entry<Element, String> entry) {
