@@ -82,8 +82,10 @@ public class MainActivity implements View.OnClickListener{
 ```
 
 ### SETUP
-To your root build.gradle
-```
+
+## To your root build.gradle
+
+```JAVA
 allprojects {
     repositories {
         ...
@@ -92,9 +94,10 @@ allprojects {
     }
 }
 ```
-To your app level build.gradle
 
-```
+## To your app level build.gradle
+
+```JAVA
 dependencies {
     implementation 'com.masum.dialogboot:dialogboot-library:1.3.8'
     annotationProcessor 'com.masum.dialogboot:dialogboot-compiler:1.3.8'
