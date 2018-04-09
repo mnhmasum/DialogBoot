@@ -4,7 +4,7 @@ DialogBoot is an android library based on annotation processor to create an Aler
 ``` JAVA
 @InjectDialog(
     isCancelable = true,
-    getMessage = "Hi I am a Dialog Boot to create a dialog"
+    getMessage = "Hi I am Dialog Boot to create a dialog"
 )
 public AlertDialog dialog;
 ```
