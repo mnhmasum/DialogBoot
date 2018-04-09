@@ -16,11 +16,11 @@ dialog.show();
 ```
 
 ### DialogBoot Plus
-Before without DialogBoot
+Without DialogBoot
 ```Java
 View view = getLayoutInflater.inflate(R.layout.my_layout, null);
 ```
-Now with DialogBoot
+With DialogBoot
 ```JAVA
 @InjectView(layout = R.layout.layout)
 View view;
