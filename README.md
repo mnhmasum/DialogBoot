@@ -85,18 +85,6 @@ public class MainActivity implements View.OnClickListener{
 
 ### SETUP
 
-## To your root build.gradle
-
-```groovy
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://dl.bintray.com/annotationmasum/DialogBoot' }
-        ...
-    }
-}
-```
-
 ## To your app level build.gradle
 
 ```groovy
