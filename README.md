@@ -91,7 +91,7 @@ public class MainActivity implements View.OnClickListener{
 allprojects {
     repositories {
         ...
-        mavenLocal()
+        maven { url 'https://dl.bintray.com/annotationmasum/DialogBoot' }
         ...
     }
 }
