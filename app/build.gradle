@@ -29,8 +29,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    //implementation 'com.masum.dialogboot:dialogboot-library:1.3.9'
-    //annotationProcessor 'com.masum.dialogboot:dialogboot-compiler:1.3.9'
+    /*implementation 'com.masum.dialogboot:dialogboot-library:1.4.0'
+    annotationProcessor 'com.masum.dialogboot:dialogboot-compiler:1.4.0'*/
 
     implementation project(':dialogboot-library')
     annotationProcessor project(':dialogboot-compiler')
