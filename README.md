@@ -89,8 +89,8 @@ public class MainActivity implements View.OnClickListener{
 
 ```groovy
 dependencies {
-    implementation 'com.masum.dialogboot:dialogboot-library:1.3.9'
-    annotationProcessor 'com.masum.dialogboot:dialogboot-compiler:1.3.9'
+    implementation 'com.masum.dialogboot:dialogboot-library:1.4.5'
+    annotationProcessor 'com.masum.dialogboot:dialogboot-compiler:1.4.5'
    
 }
 ```
