@@ -101,8 +101,8 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.masum.dialogboot:dialogboot-library:1.3.8'
-    annotationProcessor 'com.masum.dialogboot:dialogboot-compiler:1.3.8'
+    implementation 'com.masum.dialogboot:dialogboot-library:1.3.9'
+    annotationProcessor 'com.masum.dialogboot:dialogboot-compiler:1.3.9'
    
 }
 ```
