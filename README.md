@@ -1,10 +1,10 @@
-# DialogBoot
+# DialogBoot 
 DialogBoot is an android library based on annotation processor to create an AlertDialog in your code. You don't need to write boilerplate code anymore to create AlertDialog. 
 
 ``` JAVA
 @InjectDialog(
     isCancelable = true,
-    getMessage = "Hi I am a Dialog Boot to create a dialog"
+    getMessage = "Hi I am Dialog Boot to create a dialog"
 )
 public AlertDialog dialog;
 ```
@@ -16,11 +16,11 @@ dialog.show();
 ```
 
 ### DialogBoot Plus
-Before without DialogBoot
+Without DialogBoot
 ```Java
 View view = getLayoutInflater.inflate(R.layout.my_layout, null);
 ```
-Now with DialogBoot
+With DialogBoot
 ```JAVA
 @InjectView(layout = R.layout.layout)
 View view;
@@ -87,11 +87,11 @@ public class MainActivity implements View.OnClickListener{
 
 ## To your root build.gradle
 
-```JAVA
+```groovy
 allprojects {
     repositories {
         ...
-        mavenLocal()
+        maven { url 'https://dl.bintray.com/annotationmasum/DialogBoot' }
         ...
     }
 }
@@ -99,10 +99,34 @@ allprojects {
 
 ## To your app level build.gradle
 
-```JAVA
+```groovy
 dependencies {
-    implementation 'com.masum.dialogboot:dialogboot-library:1.3.8'
-    annotationProcessor 'com.masum.dialogboot:dialogboot-compiler:1.3.8'
+    implementation 'com.masum.dialogboot:dialogboot-library:1.3.9'
+    annotationProcessor 'com.masum.dialogboot:dialogboot-compiler:1.3.9'
    
 }
 ```
+License
+-----------
+
+    MIT License
+
+    Copyright (c) 2018 Nazmul Hasan Masum
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
