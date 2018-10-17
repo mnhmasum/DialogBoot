@@ -24,10 +24,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 ```JAVA
 public class MainActivity implements View.OnClickListener{
-   @InjectDialog(
-            isCancelable = true,
-            getMessage = "Hi am Dialog Boot to create a dialog"
-    )
+    @InjectDialog(isCancelable = true, getMessage = "Hi I can make your dialog in less coding")
     public AlertDialog dialog;
 
     @InjectView(layout = R.layout.layout)
