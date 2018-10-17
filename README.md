@@ -1,7 +1,7 @@
 # DialogBoot 
 DialogBoot is an android library based on annotation processor to create an AlertDialog in your code. You don't need to write boilerplate code anymore to create AlertDialog.
 
-Note: It support only android.app.AlertDialog. DialogBoot does not support android.support.v7.app.AlertDialog yet 
+Note: DialogBoot supports only android.app.AlertDialog. It does not support android.support.v7.app.AlertDialog yet 
 
 ### EXAMPLE 1
 
@@ -71,22 +71,8 @@ dependencies {
 }
 ```
 
-``` JAVA
-@InjectDialog(
-    isCancelable = true,
-    getMessage = "Hi I am Dialog Boot to create a dialog"
-)
-public AlertDialog dialog;
-```
-### To show dialog in your activity
-
-``` JAVA
-DialogBootLoader.bind(this);
-dialog.show();
-```
-
 ### DialogBoot Plus
-Without DialogBoot
+In Traditional Java
 ```Java
 View view = getLayoutInflater.inflate(R.layout.my_layout, null);
 ```
