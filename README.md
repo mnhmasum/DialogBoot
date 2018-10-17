@@ -65,7 +65,7 @@ dependencies {
 }
 ```
 
-### DialogBoot Plus
+### DialogBoot Extra Benifit
 In Traditional Java
 ```Java
 View view = getLayoutInflater.inflate(R.layout.my_layout, null);
