@@ -6,10 +6,7 @@ Note: DialogBoot supports only android.app.AlertDialog. It does not support andr
 ### EXAMPLE 1
 
 ```JAVA
-@InjectDialog(
-    isCancelable = true,
-    getMessage = "Hi I am DialogBoot to create a dialog"
-)
+@InjectDialog(isCancelable = true, getMessage = "Hi I can make your dialog")
 public AlertDialog dialog;
 
 @Override
